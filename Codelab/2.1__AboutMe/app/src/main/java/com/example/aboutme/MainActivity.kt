@@ -5,40 +5,40 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import androidx.databinding.DataBindingUtil
+import com.example.aboutme.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var editText : EditText
-    lateinit var nicknameTextView : TextView
-    lateinit var doneButton : Button
+
+    private lateinit var binding : ActivityMainBinding
+    private var myName : MyName = MyName("Cocoa")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        editText = findViewById(R.id.nickname_edit)
-        nicknameTextView = findViewById(R.id.nickname_text)
-        doneButton = findViewById(R.id.done_button)
+        binding.myName = myName
 
-        doneButton.setOnClickListener {
+        binding.doneButton.setOnClickListener {
             addNickname(it) // it은 인수로 전달된 뷰인 'done_button'을 나타냄
         }
 
-        nicknameTextView.setOnClickListener {
+        binding.nicknameText.setOnClickListener {
             updateNickname(it)
         }
     }
 
     private fun addNickname(view: View) {
 
-        nicknameTextView.text = editText.text
-
-        editText.visibility = View.GONE
-        view.visibility = View.GONE
-        nicknameTextView.visibility = View.VISIBLE
+        binding.apply {
+            myName?.nickname = nicknameEdit.text.toString()
+//            nicknameText.text = nicknameEdit.text.toString()
+            invalidateAll() // refreshing UI with the value in the updated binding object
+            nicknameEdit.visibility = View.GONE
+            doneButton.visibility = View.GONE
+            nicknameText.visibility = View.VISIBLE
+        }
 
         // Hide the keyboard.
         val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -46,15 +46,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateNickname(view: View) {
-        editText.visibility = View.VISIBLE
-        doneButton.visibility = View.VISIBLE
+        binding.nicknameEdit.visibility = View.VISIBLE
+        binding.doneButton.visibility = View.VISIBLE
         view.visibility = View.GONE
 
         // Set the focus to the edit text
-        editText.requestFocus()
+        binding.nicknameEdit.requestFocus()
 
         // Show the keyboard.
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.showSoftInput(editText, 0)
+        imm.showSoftInput(binding.nicknameEdit, 0)
     }
 }

@@ -14,7 +14,8 @@
   ~ limitations under the License.
   -->
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <LinearLayout
@@ -26,6 +27,14 @@
                  Use @+id/titleFragment for the android:id
                  Use com.example.android.navigation.TitleFragment for the android:name
                  Use match_parent for the layout_height and layout_width -->
+            <FrameLayout
+                android:id="@+id/titleFragment"
+                android:name="com.example.android.navigation.TitleFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:text="Hi" />-->
         </LinearLayout>
-
 </layout>

@@ -1,4 +1,4 @@
-#Wed Nov 23 02:40:10 KST 2022
+#Wed Nov 23 09:46:26 KST 2022
 base.0=/Users/nahyun/GitHub/android_self_study/Codelab/4.1__DessertClicker/app/build/intermediates/dex/debug/mergeDexDebug/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex
